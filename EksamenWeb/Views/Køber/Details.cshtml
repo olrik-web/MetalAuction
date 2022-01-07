@@ -1,0 +1,41 @@
+﻿@model EntityFrameworkModel.Køber
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Køber</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.navn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.navn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tlf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tlf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KøberId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

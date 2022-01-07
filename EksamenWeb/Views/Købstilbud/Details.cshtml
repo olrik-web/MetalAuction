@@ -1,0 +1,42 @@
+﻿@model EntityFrameworkModel.Købstilbud
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Købstilbud</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pris)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pris)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Køber.navn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Køber.navn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salgsudbud.metaltype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salgsudbud.metaltype)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KøbstilbudId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

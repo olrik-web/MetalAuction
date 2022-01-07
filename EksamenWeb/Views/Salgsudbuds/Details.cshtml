@@ -1,0 +1,60 @@
+﻿@model EntityFrameworkModel.Salgsudbud
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Salgsudbud</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.metaltype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.metaltype)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mængde)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mængde)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tidsfrist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tidsfrist)
+        </dd>
+
+        <dt>
+            Højeste bud: 
+        </dt>
+
+        <dd>
+            @if (Model.Købstilbud.Count > 0)
+            {
+                @(Model.Købstilbud.Max(model => model.pris))
+            } else
+            {
+                @("No bids yet...")
+            }
+
+        </dd>
+        
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Return to list", "Index") | 
+    @Html.ActionLink("Place bid", "Create", "Købstilbud")
+
+</p>

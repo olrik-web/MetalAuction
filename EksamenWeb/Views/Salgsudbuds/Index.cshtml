@@ -1,0 +1,44 @@
+﻿@model IEnumerable<EntityFrameworkModel.Salgsudbud>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.metaltype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mængde)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tidsfrist)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.tidsfrist.CompareTo(DateTime.Now) > 0)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.metaltype)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mængde)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tidsfrist)
+                </td>
+                <td>
+                    @Html.ActionLink("Place bid", "Details", new { id = item.SalgsudbudId})
+                </td>
+            </tr>
+        }
+    }
+
+</table>

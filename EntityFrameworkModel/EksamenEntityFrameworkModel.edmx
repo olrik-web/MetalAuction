@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EksamenDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Køber">
+          <Key>
+            <PropertyRef Name="KøberId" />
+          </Key>
+          <Property Name="KøberId" Type="int" Nullable="false" />
+          <Property Name="navn" Type="nvarchar" MaxLength="50" />
+          <Property Name="tlf" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Købstilbud">
+          <Key>
+            <PropertyRef Name="KøbstilbudId" />
+          </Key>
+          <Property Name="KøbstilbudId" Type="int" Nullable="false" />
+          <Property Name="pris" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="køberId" Type="int" Nullable="false" />
+          <Property Name="salgsudbudId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salgsudbud">
+          <Key>
+            <PropertyRef Name="SalgsudbudId" />
+          </Key>
+          <Property Name="SalgsudbudId" Type="int" Nullable="false" />
+          <Property Name="metaltype" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="mængde" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="tidsfrist" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Købstilbu__køber__160F4887">
+          <End Role="Køber" Type="Self.Køber" Multiplicity="1" />
+          <End Role="Købstilbud" Type="Self.Købstilbud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Køber">
+              <PropertyRef Name="KøberId" />
+            </Principal>
+            <Dependent Role="Købstilbud">
+              <PropertyRef Name="køberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Købstilbu__salgs__17036CC0">
+          <End Role="Salgsudbud" Type="Self.Salgsudbud" Multiplicity="1" />
+          <End Role="Købstilbud" Type="Self.Købstilbud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salgsudbud">
+              <PropertyRef Name="SalgsudbudId" />
+            </Principal>
+            <Dependent Role="Købstilbud">
+              <PropertyRef Name="salgsudbudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EksamenDatabaseModelStoreContainer">
+          <EntitySet Name="Køber" EntityType="Self.Køber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Købstilbud" EntityType="Self.Købstilbud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salgsudbud" EntityType="Self.Salgsudbud" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Købstilbu__køber__160F4887" Association="Self.FK__Købstilbu__køber__160F4887">
+            <End Role="Køber" EntitySet="Køber" />
+            <End Role="Købstilbud" EntitySet="Købstilbud" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Købstilbu__salgs__17036CC0" Association="Self.FK__Købstilbu__salgs__17036CC0">
+            <End Role="Salgsudbud" EntitySet="Salgsudbud" />
+            <End Role="Købstilbud" EntitySet="Købstilbud" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EksamenDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Køber">
+          <Key>
+            <PropertyRef Name="KøberId" />
+          </Key>
+          <Property Name="KøberId" Type="Int32" Nullable="false" />
+          <Property Name="navn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tlf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Købstilbud" Relationship="Self.FK__Købstilbu__køber__160F4887" FromRole="Køber" ToRole="Købstilbud" />
+        </EntityType>
+        <EntityType Name="Købstilbud">
+          <Key>
+            <PropertyRef Name="KøbstilbudId" />
+          </Key>
+          <Property Name="KøbstilbudId" Type="Int32" Nullable="false" />
+          <Property Name="pris" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="køberId" Type="Int32" Nullable="false" />
+          <Property Name="salgsudbudId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Køber" Relationship="Self.FK__Købstilbu__køber__160F4887" FromRole="Købstilbud" ToRole="Køber" />
+          <NavigationProperty Name="Salgsudbud" Relationship="Self.FK__Købstilbu__salgs__17036CC0" FromRole="Købstilbud" ToRole="Salgsudbud" />
+        </EntityType>
+        <EntityType Name="Salgsudbud">
+          <Key>
+            <PropertyRef Name="SalgsudbudId" />
+          </Key>
+          <Property Name="SalgsudbudId" Type="Int32" Nullable="false" />
+          <Property Name="metaltype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mængde" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="tidsfrist" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Købstilbud" Relationship="Self.FK__Købstilbu__salgs__17036CC0" FromRole="Salgsudbud" ToRole="Købstilbud" />
+        </EntityType>
+        <Association Name="FK__Købstilbu__køber__160F4887">
+          <End Role="Køber" Type="Self.Køber" Multiplicity="1" />
+          <End Role="Købstilbud" Type="Self.Købstilbud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Køber">
+              <PropertyRef Name="KøberId" />
+            </Principal>
+            <Dependent Role="Købstilbud">
+              <PropertyRef Name="køberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Købstilbu__salgs__17036CC0">
+          <End Role="Salgsudbud" Type="Self.Salgsudbud" Multiplicity="1" />
+          <End Role="Købstilbud" Type="Self.Købstilbud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salgsudbud">
+              <PropertyRef Name="SalgsudbudId" />
+            </Principal>
+            <Dependent Role="Købstilbud">
+              <PropertyRef Name="salgsudbudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EksamenDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Køber" EntityType="Self.Køber" />
+          <EntitySet Name="Købstilbud" EntityType="Self.Købstilbud" />
+          <EntitySet Name="Salgsudbuds" EntityType="Self.Salgsudbud" />
+          <AssociationSet Name="FK__Købstilbu__køber__160F4887" Association="Self.FK__Købstilbu__køber__160F4887">
+            <End Role="Køber" EntitySet="Køber" />
+            <End Role="Købstilbud" EntitySet="Købstilbud" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Købstilbu__salgs__17036CC0" Association="Self.FK__Købstilbu__salgs__17036CC0">
+            <End Role="Salgsudbud" EntitySet="Salgsudbuds" />
+            <End Role="Købstilbud" EntitySet="Købstilbud" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EksamenDatabaseModelStoreContainer" CdmEntityContainer="EksamenDatabaseEntities">
+          <EntitySetMapping Name="Køber">
+            <EntityTypeMapping TypeName="EksamenDatabaseModel.Køber">
+              <MappingFragment StoreEntitySet="Køber">
+                <ScalarProperty Name="KøberId" ColumnName="KøberId" />
+                <ScalarProperty Name="navn" ColumnName="navn" />
+                <ScalarProperty Name="tlf" ColumnName="tlf" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Købstilbud">
+            <EntityTypeMapping TypeName="EksamenDatabaseModel.Købstilbud">
+              <MappingFragment StoreEntitySet="Købstilbud">
+                <ScalarProperty Name="KøbstilbudId" ColumnName="KøbstilbudId" />
+                <ScalarProperty Name="pris" ColumnName="pris" />
+                <ScalarProperty Name="køberId" ColumnName="køberId" />
+                <ScalarProperty Name="salgsudbudId" ColumnName="salgsudbudId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salgsudbuds">
+            <EntityTypeMapping TypeName="EksamenDatabaseModel.Salgsudbud">
+              <MappingFragment StoreEntitySet="Salgsudbud">
+                <ScalarProperty Name="SalgsudbudId" ColumnName="SalgsudbudId" />
+                <ScalarProperty Name="metaltype" ColumnName="metaltype" />
+                <ScalarProperty Name="mængde" ColumnName="mængde" />
+                <ScalarProperty Name="tidsfrist" ColumnName="tidsfrist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
